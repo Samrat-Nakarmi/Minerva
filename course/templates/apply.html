@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %} Apply {% endblock %}
+{% block body %}
+    {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+          {{ message|striptags }}
+        </div>
+        <br/>
+    {% endfor %}
+    <form action="" method="POST" style="text-align: center;">
+        {% csrf_token %}
+        <br><br>
+        <h1>Verify as Teacher</h1>
+        <br><br>
+    We have sent a code to your email<br>
+    <input name="code" type="number" maxlength="6"><br><br>
+    Please keep your Github username here<br>
+    <input name="username" type="text"><br><br>
+    <input type="submit" value="Verify" class="btn btn-primary">
+     <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+ 
+
+    </form>
+{% endblock %}

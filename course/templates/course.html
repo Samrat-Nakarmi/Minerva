@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load course_extras %}
+{% block title %}
+ {% if course %}
+ {{ course.name }}
+{% else %}
+    Not found
+ {% endif %}
+{% endblock title %}
+{% block body %}
+  {% if course %}
+  <img src="/media/{{ course.picture }}" width="100px" height="100px" style="margin-top: 5rem; margin-left:5rem; border-radius:100px">
+    <h1 style="margin-top: 2rem; margin-left:5rem">{{ course.name }}</h1>
+    <p style="margin-left:7rem;">By {{ course.teacher.username }}</p>
+    <div class="forum" style="margin-left: 7.5%">
+      <a href="/course/{{ course.id }}/module"><button class="btn btn-primary">Study</button></a>
+      <a href="/forum/{{ course.id }}"><button class="btn btn-primary">Forum</button></a>
+    </div>
+        <div style="text-align: center;">
+          
+       <h1  style="margin-top: 5rem;">Modules</h1>
+
+
+          
+
+       {% if request.user == course.teacher %}
+       <br>
+       <br>
+       <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Create Module
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="/course/{{ course.id }}/createmodule/text">Text</a></li>
+    <li><a class="dropdown-item" href="/course/{{ course.id }}/createmodule/video">Video</a></li>
+  </ul>
+</div>    
+       <br><br>
+       {% endif %}
+<div style="text-align: center;margin-left:40em">
+    {% for module in modules %}
+     <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ module.name }}</h5>
+        <p class="card-text">{{ module.info }}</p>
+      </div>
+    </div>
+  </div>
+<br>
+
+      {% endfor %}
+      </div>
+
+  </div>
+    {% else %}
+
+    <h1 style="text-align: center; margin-top:10%">Not Found</h1>
+  {% endif %}
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+{% endblock body %}
